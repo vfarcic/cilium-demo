@@ -1,0 +1,18 @@
+---
+
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: silly-demo-ingress
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgresql
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app.kubernetes.io/name: silly-demo
+    toPorts:
+    - ports:
+      - port: "5432"
+        protocol: TCP
